@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppStyle.appBarTheme
           // Set background color to dark green
           ),
-      home: HomePage(),
+      home: HomeScreen(),
     );
   }
 }

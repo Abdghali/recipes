@@ -5,6 +5,7 @@ import '../../models/app_bar_helper.dart';
 import '../../services/data.dart';
 import '../favorite/favorite_screen.dart';
 import '../search/history_search.dart';
+import '../search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${AppBarHelper._title}'),
+        title: Text('${AppBarHelper.getTitle()}'),
         backgroundColor: Colors.green,
         actions: showSearchIcon
             ? [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/utils/app_style.dart';
-import 'package:recipes/views/home_page.dart';
+import 'package:recipes/views/home/home_page.dart';
 
 import 'utils/app_color.dart';
 

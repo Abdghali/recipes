@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:recipes/views/search/search_result.dart';
+
+import '../widgets/custom_buttons_toggle.dart';
 
 class SearchScreen extends StatefulWidget {
   @override

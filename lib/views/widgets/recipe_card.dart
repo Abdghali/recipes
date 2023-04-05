@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/recipe_model.dart';
+import '../recipe_details/recipe_details_screen.dart';
 
 class RecipeCard extends StatelessWidget {
   final RecipeModel recipe;

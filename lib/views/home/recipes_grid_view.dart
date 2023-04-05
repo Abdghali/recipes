@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../models/recipe_model.dart';
+
 class RecipesGridView extends StatelessWidget {
   final List<RecipeModel>? myRecipeList;
 

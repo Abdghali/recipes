@@ -4,6 +4,9 @@ import '../../models/recipe.dart';
 
 class RecipesLocalService {
   static const _boxName = 'favouriteBox';
+  RecipesLocalService._();
+
+  static final RecipesLocalService instance = RecipesLocalService._();
 
   Future<Box<Recipe>> _getBox() async {
     return Hive.openBox<Recipe>(_boxName);

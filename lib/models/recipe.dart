@@ -104,7 +104,7 @@ class Recipe {
   String? source;
   String? url;
   String? shareAs;
-  int? yield;
+  double? yield;
   List<String>? dietLabels;
   List<String>? healthLabels;
   List<String>? cautions;
@@ -112,7 +112,7 @@ class Recipe {
   List<Ingredients>? ingredients;
   double? calories;
   double? totalWeight;
-  int? totalTime;
+  double? totalTime;
   List<String>? cuisineType;
   List<String>? mealType;
   List<String>? dishType;

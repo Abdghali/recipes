@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:recipes/views/home/recipes_grid_view.dart';
 
 import '../../models/app_bar_helper.dart';
+import '../../models/recipe.dart';
 import '../../services/data.dart';
+import '../../services/recipe_service.dart';
 import '../favorite/favorite_screen.dart';
 import '../search/history_search.dart';
 import '../search/search_screen.dart';
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _onSearchPressed() {
+  void _onSearchPressed() async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SearchScreen()),

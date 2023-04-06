@@ -8,6 +8,10 @@ class RecipesLocalService {
 
   static final RecipesLocalService instance = RecipesLocalService._();
 
+  void openBox() async {
+    await Hive.openBox<Recipe>(_boxName);
+  }
+
   Future<Box<Recipe>> _getBox() async {
     return Hive.openBox<Recipe>(_boxName);
   }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../controllers/recipe_details_controller.dart';
 import '../../models/recipe.dart';
 import '../../models/recipe_model.dart';
+import '../../services/local_db/local_db_service.dart';
 
 class RecipeDetails extends StatelessWidget {
   final Recipe recipe;
@@ -102,8 +103,9 @@ class RecipeDetails extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.favorite_border),
-                  onPressed: () {
-                    // Add recipe to favorites
+                  onPressed: () async {
+                    await RecipesLocalService.instance
+                        .addRecipeToFavourites(recipe);
                   },
                   color: Colors.green,
                 ),

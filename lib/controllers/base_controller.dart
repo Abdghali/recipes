@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-abstract class BaseController extends GetxController {
+class BaseController extends GetxController {
   RxBool isLoading = false.obs;
 
   void startLoading() {

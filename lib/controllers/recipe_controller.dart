@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../models/recipe.dart';
 import '../services/recipe_service.dart';
+import 'base_controller.dart';
 
 // class RecipeController extends GetxController {
 // RecipesService resp = RecipesService();
@@ -14,7 +15,7 @@ import '../services/recipe_service.dart';
 // import 'package:myapp/models/recipe.dart';
 // import 'package:myapp/services/api_service.dart';
 
-class RecipeController extends GetxController {
+class RecipeController extends BaseController {
   RecipesService resp = RecipesService();
 
   var isLoading = true.obs;
@@ -27,6 +28,7 @@ class RecipeController extends GetxController {
   }
 
   fetchRecipes(String searchValue) async {
+    startLoading();
     try {
       isLoading(true);
       List<Recipe?> recipeList = await resp.fetchRecipes(searchValue);
@@ -38,5 +40,6 @@ class RecipeController extends GetxController {
     } finally {
       isLoading(false);
     }
+    stopLoading();
   }
 }

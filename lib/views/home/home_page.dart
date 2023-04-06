@@ -16,9 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    RecipesGridView(
-      myRecipeList: recipeList,
-    ),
+    RecipesGridView(),
     FavoriteScreen(
       favoriteRecipes: recipeList,
     ),

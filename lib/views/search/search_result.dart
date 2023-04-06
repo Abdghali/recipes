@@ -62,7 +62,7 @@ class _SearchResultState extends State<SearchResult> {
           SizedBox(height: 16.0),
           Expanded(
             child: RecipesGridView(
-              myRecipeList: recipeList,
+              isSearchView: true,
             ),
           ),
         ],

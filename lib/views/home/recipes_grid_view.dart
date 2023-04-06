@@ -4,10 +4,10 @@ import '../../models/recipe_model.dart';
 import '../widgets/recipe_card.dart';
 
 class RecipesGridView extends StatelessWidget {
-  final List<RecipeModel>? myRecipeList;
+  final bool? isSearchView;
+  RecipesGridView({Key? key, this.isSearchView = false}) : super(key: key);
 
-  const RecipesGridView({Key? key, required this.myRecipeList})
-      : super(key: key);
+  final List<RecipeModel>? myRecipeList = [];
 
   @override
   Widget build(BuildContext context) {

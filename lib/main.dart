@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:recipes/utils/app_style.dart';
 import 'package:recipes/views/home/home_page.dart';
 
 import 'utils/app_color.dart';
 
-void main() {
+void main() async {
+  await Hive.openBox('favouriteBox');
   runApp(const MyApp());
 }
 

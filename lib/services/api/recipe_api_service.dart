@@ -1,10 +1,9 @@
 import 'dart:convert';
-
-import '../models/recipe.dart';
-import '../utils/constant.dart';
+import '../../models/recipe.dart';
+import '../../utils/constant.dart';
 import 'package:http/http.dart' as http;
 
-class RecipesService {
+class RecipesApiService {
   String baseUrl =
       '${AppConstant.api}${AppConstant.recipes}?app_id=${AppConstant.app_id}&app_key=${AppConstant.app_key}&type=public';
   Future<List<Recipe?>> fetchRecipes(String searchValue) async {

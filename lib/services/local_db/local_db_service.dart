@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../models/recipe.dart';
 
@@ -8,7 +9,7 @@ class RecipesLocalService {
 
   static final RecipesLocalService instance = RecipesLocalService._();
 
-  void openBox() async {
+  void init() async {
     final appDocumentDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocumentDir.path);
     await Hive.openBox<Recipe>(_boxName);

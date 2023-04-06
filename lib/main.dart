@@ -7,7 +7,8 @@ import 'package:recipes/views/home/home_page.dart';
 import 'utils/app_color.dart';
 
 void main() {
-  RecipesLocalService.instance.openBox();
+  WidgetsFlutterBinding.ensureInitialized();
+  RecipesLocalService.instance.init();
   runApp(const MyApp());
 }
 

@@ -9,6 +9,8 @@ class RecipesLocalService {
   static final RecipesLocalService instance = RecipesLocalService._();
 
   void openBox() async {
+    final appDocumentDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDocumentDir.path);
     await Hive.openBox<Recipe>(_boxName);
   }
 

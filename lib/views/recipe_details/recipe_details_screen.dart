@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/recipe_details_controller.dart';
 import '../../models/recipe.dart';
 import '../../models/recipe_model.dart';
 
@@ -11,6 +14,8 @@ class RecipeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final recipeDetailsController = Get.put(RecipeDetailsController());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -58,9 +63,7 @@ class RecipeDetails extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    recipe.ingredients!
-                        .map((e) => e.food)
-                        .join(", "), //Todo 1 list
+                    recipe.ingredients!.map((e) => e.food).join(", "),
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Colors.brown,
                         ),
@@ -108,6 +111,7 @@ class RecipeDetails extends StatelessWidget {
                   icon: const Icon(Icons.share),
                   onPressed: () {
                     // Share recipe
+                    recipeDetailsController.shareRecipe(recipe);
                   },
                   color: Colors.green,
                 ),

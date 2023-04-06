@@ -11,5 +11,5 @@ class AppConstant {
   static const String api = 'https://api.edamam.com/api/';
 
 // The URL for the Edamam Recipes API.
-  static const String apiRecipes = 'https://api.edamam.com/api/recipes/';
+  static const String recipes = 'recipes/v2';
 }

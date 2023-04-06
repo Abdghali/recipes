@@ -6,4 +6,10 @@ class AppConstant {
 
   // The type of access for the API (public, private, etc.)
   static const String type = 'public';
+
+// The base URL for the Edamam API.
+  static const String api = 'https://api.edamam.com/api/';
+
+// The URL for the Edamam Recipes API.
+  static const String apiRecipes = 'https://api.edamam.com/api/recipes/';
 }

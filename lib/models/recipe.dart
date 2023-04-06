@@ -36,21 +36,16 @@ class APIRecipe {
 }
 
 class Links {
-  Self? self;
-  Self? next;
+  Next? next;
 
-  Links({this.self, this.next});
+  Links({this.next});
 
   Links.fromJson(Map<String, dynamic> json) {
-    self = json['self'] != null ? new Self.fromJson(json['self']) : null;
-    next = json['next'] != null ? new Self.fromJson(json['next']) : null;
+    next = json['next'] != null ? new Next.fromJson(json['next']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.self != null) {
-      data['self'] = this.self!.toJson();
-    }
     if (this.next != null) {
       data['next'] = this.next!.toJson();
     }
@@ -58,13 +53,13 @@ class Links {
   }
 }
 
-class Self {
+class Next {
   String? href;
   String? title;
 
-  Self({this.href, this.title});
+  Next({this.href, this.title});
 
-  Self.fromJson(Map<String, dynamic> json) {
+  Next.fromJson(Map<String, dynamic> json) {
     href = json['href'];
     title = json['title'];
   }
@@ -106,52 +101,42 @@ class Recipe {
   String? label;
   String? image;
   Images? images;
-  // String? source;
-  // String? url;
-  // String? shareAs;
-  // int? yield;
-  // List<String>? dietLabels;
-  // List<String>? healthLabels;
-  // List<String>? cautions;
+  String? source;
+  String? url;
+  String? shareAs;
+  int? yield;
+  List<String>? dietLabels;
+  List<String>? healthLabels;
+  List<String>? cautions;
   List<String>? ingredientLines;
   List<Ingredients>? ingredients;
-  int? calories;
-  // int? glycemicIndex;
-  // int? totalCO2Emissions;
-  // String? co2EmissionsClass;
-  // int? totalWeight;
-  // List<String>? cuisineType;
+  double? calories;
+  double? totalWeight;
+  int? totalTime;
+  List<String>? cuisineType;
   List<String>? mealType;
   List<String>? dishType;
-  List<String>? instructions;
-  // List<String>? tags;
-  // String? externalId;
 
   Recipe({
     this.uri,
     this.label,
     this.image,
     this.images,
-    // this.source,
-    // this.url,
-    // this.shareAs,
-    // this.yield,
-    // this.dietLabels,
-    // this.healthLabels,
-    // this.cautions,
+    this.source,
+    this.url,
+    this.shareAs,
+    this.yield,
+    this.dietLabels,
+    this.healthLabels,
+    this.cautions,
     this.ingredientLines,
     this.ingredients,
     this.calories,
-    // this.glycemicIndex,
-    // this.totalCO2Emissions,
-    // this.co2EmissionsClass,
-    // this.totalWeight,
-    // this.cuisineType,
+    this.totalWeight,
+    this.totalTime,
+    this.cuisineType,
     this.mealType,
     this.dishType,
-    this.instructions,
-    // this.tags,
-    // this.externalId,
   });
 
   Recipe.fromJson(Map<String, dynamic> json) {
@@ -160,13 +145,13 @@ class Recipe {
     image = json['image'];
     images =
         json['images'] != null ? new Images.fromJson(json['images']) : null;
-    // source = json['source'];
-    // url = json['url'];
-    // shareAs = json['shareAs'];
-    // yield = json['yield'];
-    // dietLabels = json['dietLabels'].cast<String>();
-    // healthLabels = json['healthLabels'].cast<String>();
-    // cautions = json['cautions'].cast<String>();
+    source = json['source'];
+    url = json['url'];
+    shareAs = json['shareAs'];
+    yield = json['yield'];
+    dietLabels = json['dietLabels'].cast<String>();
+    healthLabels = json['healthLabels'].cast<String>();
+    cautions = json['cautions'].cast<String>();
     ingredientLines = json['ingredientLines'].cast<String>();
     if (json['ingredients'] != null) {
       ingredients = <Ingredients>[];
@@ -175,16 +160,11 @@ class Recipe {
       });
     }
     calories = json['calories'];
-    // glycemicIndex = json['glycemicIndex'];
-    // totalCO2Emissions = json['totalCO2Emissions'];
-    // co2EmissionsClass = json['co2EmissionsClass'];
-    // totalWeight = json['totalWeight'];
-    // cuisineType = json['cuisineType'].cast<String>();
+    totalWeight = json['totalWeight'];
+    totalTime = json['totalTime'];
+    cuisineType = json['cuisineType'].cast<String>();
     mealType = json['mealType'].cast<String>();
     dishType = json['dishType'].cast<String>();
-    instructions = json['instructions'].cast<String>();
-    // tags = json['tags'].cast<String>();
-    // externalId = json['externalId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -195,29 +175,23 @@ class Recipe {
     if (this.images != null) {
       data['images'] = this.images!.toJson();
     }
-    // data['source'] = this.source;
-    // data['url'] = this.url;
-    // data['shareAs'] = this.shareAs;
-    // data['yield'] = this.yield;
-    // data['dietLabels'] = this.dietLabels;
-    // data['healthLabels'] = this.healthLabels;
-    // data['cautions'] = this.cautions;
+    data['source'] = this.source;
+    data['url'] = this.url;
+    data['shareAs'] = this.shareAs;
+    data['yield'] = this.yield;
+    data['dietLabels'] = this.dietLabels;
+    data['healthLabels'] = this.healthLabels;
+    data['cautions'] = this.cautions;
     data['ingredientLines'] = this.ingredientLines;
     if (this.ingredients != null) {
       data['ingredients'] = this.ingredients!.map((v) => v.toJson()).toList();
     }
     data['calories'] = this.calories;
-    // data['glycemicIndex'] = this.glycemicIndex;
-    // data['totalCO2Emissions'] = this.totalCO2Emissions;
-    // data['co2EmissionsClass'] = this.co2EmissionsClass;
-    // data['totalWeight'] = this.totalWeight;
-    // data['cuisineType'] = this.cuisineType;
+    data['totalWeight'] = this.totalWeight;
+    data['totalTime'] = this.totalTime;
+    data['cuisineType'] = this.cuisineType;
     data['mealType'] = this.mealType;
     data['dishType'] = this.dishType;
-    data['instructions'] = this.instructions;
-    // data['tags'] = this.tags;
-    // data['externalId'] = this.externalId;
-
     return data;
   }
 }
@@ -285,11 +259,13 @@ class THUMBNAIL {
 
 class Ingredients {
   String? text;
-  int? quantity;
+  double? quantity;
   String? measure;
   String? food;
-  int? weight;
+  double? weight;
+  String? foodCategory;
   String? foodId;
+  String? image;
 
   Ingredients(
       {this.text,
@@ -297,7 +273,9 @@ class Ingredients {
       this.measure,
       this.food,
       this.weight,
-      this.foodId});
+      this.foodCategory,
+      this.foodId,
+      this.image});
 
   Ingredients.fromJson(Map<String, dynamic> json) {
     text = json['text'];
@@ -305,7 +283,9 @@ class Ingredients {
     measure = json['measure'];
     food = json['food'];
     weight = json['weight'];
+    foodCategory = json['foodCategory'];
     foodId = json['foodId'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -315,7 +295,9 @@ class Ingredients {
     data['measure'] = this.measure;
     data['food'] = this.food;
     data['weight'] = this.weight;
+    data['foodCategory'] = this.foodCategory;
     data['foodId'] = this.foodId;
+    data['image'] = this.image;
     return data;
   }
 }

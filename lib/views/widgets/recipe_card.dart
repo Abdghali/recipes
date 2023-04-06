@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:recipes/models/recipe.dart';
 
-import '../../models/recipe_model.dart';
 import '../recipe_details/recipe_details_screen.dart';
 
 class RecipeCard extends StatelessWidget {
-  final RecipeModel recipe;
+  final Recipe recipe;
 
   RecipeCard({required this.recipe});
 
@@ -13,12 +13,12 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RecipeDetails(recipe: recipe),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => RecipeDetails(recipe: recipe),
+        //   ),
+        // );
       },
       child: Card(
         elevation: 4,
@@ -32,7 +32,7 @@ class RecipeCard extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: CachedNetworkImage(
-                  imageUrl: recipe.imageUrl,
+                  imageUrl: recipe.uri!,
                   placeholder: (context, url) => Image.asset(
                     'assets/images/placeholder4.png',
                     fit: BoxFit.cover,
@@ -62,7 +62,7 @@ class RecipeCard extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Text(
-                    recipe.name,
+                    recipe.label!,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,

@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../models/recipe_model.dart';
+import '../../controllers/recipe_controller.dart';
 import '../widgets/recipe_card.dart';
 
 class RecipesGridView extends StatelessWidget {
   final bool? isSearchView;
   RecipesGridView({Key? key, this.isSearchView = false}) : super(key: key);
 
-  final List<RecipeModel>? myRecipeList = [];
-
+  // final List<RecipeModel>? myRecipeList = [];
+  final controller = Get.put(RecipeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GridView.count(
+        body: Obx(
+      () => GridView.count(
         crossAxisCount: 2,
         padding: EdgeInsets.all(16.0),
         mainAxisSpacing: 16.0,
         crossAxisSpacing: 16.0,
-        children: myRecipeList != null
+        children: controller.recipes.value != null
             ? List.generate(
-                myRecipeList!.length,
+                controller.recipes.value.length,
                 (index) => RecipeCard(
-                  recipe: myRecipeList![index],
+                  recipe: controller.recipes.value[index]!,
                 ),
               )
             : [],
       ),
-    );
+    ));
   }
 }

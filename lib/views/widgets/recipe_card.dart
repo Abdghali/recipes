@@ -13,12 +13,12 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => RecipeDetails(recipe: recipe),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RecipeDetails(recipe: recipe),
+          ),
+        );
       },
       child: Card(
         elevation: 4,

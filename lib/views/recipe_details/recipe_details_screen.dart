@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/recipe.dart';
 import '../../models/recipe_model.dart';
 
 class RecipeDetails extends StatelessWidget {
-  final RecipeModel recipe;
+  final Recipe recipe;
 
   RecipeDetails({required this.recipe});
 
@@ -13,7 +14,7 @@ class RecipeDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text(recipe.name),
+        title: Text(recipe.label!),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +23,7 @@ class RecipeDetails extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               child: CachedNetworkImage(
-                imageUrl: recipe.imageUrl,
+                imageUrl: recipe.image!,
                 fit: BoxFit.cover,
                 errorWidget: (_, __, ___) => Image.asset(
                   'assets/images/placeholder4.png',
@@ -35,7 +36,7 @@ class RecipeDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              recipe.name,
+              recipe.label!,
               style: Theme.of(context).textTheme.headline6!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.brown,
@@ -43,7 +44,7 @@ class RecipeDetails extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          if (recipe.ingredients.isNotEmpty)
+          if (recipe.ingredients!.isNotEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -57,7 +58,10 @@ class RecipeDetails extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    recipe.ingredients,
+                    recipe.ingredients!
+                        .map((e) => '${e.food}')
+                        .toList()
+                        .toString(), //Todo 1 list
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Colors.brown,
                         ),
@@ -66,7 +70,7 @@ class RecipeDetails extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 16),
-          if (recipe.instructions.isNotEmpty)
+          if (recipe.ingredientLines!.isNotEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -80,7 +84,7 @@ class RecipeDetails extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    recipe.instructions,
+                    recipe.ingredientLines!.toString(),
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Colors.brown,
                         ),

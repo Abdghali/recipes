@@ -10,12 +10,12 @@ import '../../services/local_db/local_db_service.dart';
 
 class RecipeDetails extends StatelessWidget {
   final Recipe recipe;
-
   RecipeDetails({required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     final recipeDetailsController = Get.put(RecipeDetailsController());
+    recipeDetailsController.init(recipe);
 
     return Scaffold(
       appBar: AppBar(
@@ -101,13 +101,18 @@ class RecipeDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  icon: const Icon(Icons.favorite_border),
-                  onPressed: () async {
-                    await RecipesLocalService.instance
-                        .addRecipeToFavourites(recipe);
-                  },
-                  color: Colors.green,
+                Obx(
+                  () => IconButton(
+                    icon: Icon(recipeDetailsController.isInFavourite.value
+                        ? Icons.favorite_rounded
+                        : Icons.favorite_border),
+                    onPressed: () async {
+                      recipeDetailsController.onFavoriteClicked(recipe);
+                    },
+                    color: recipeDetailsController.isInFavourite.value
+                        ? Colors.red
+                        : Colors.green,
+                  ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.share),

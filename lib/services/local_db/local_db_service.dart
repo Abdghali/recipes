@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:recipes/services/local_db/recipe_adapter.dart';
 
 import '../../models/recipe.dart';
 
@@ -12,6 +13,7 @@ class RecipesLocalService {
   void init() async {
     final appDocumentDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocumentDir.path);
+    Hive.registerAdapter(RecipeAdapter());
     await Hive.openBox<Recipe>(_boxName);
   }
 
@@ -37,5 +39,11 @@ class RecipesLocalService {
   Future<void> clearFavouriteRecipes() async {
     final box = await _getBox();
     await box.clear();
+  }
+
+  Future<bool> isRecipeInFavourites(Recipe recipe) async {
+    final box = await _getBox();
+    final recipes = box.values.toList();
+    return recipes.any((r) => (r as Recipe).label == recipe.label);
   }
 }

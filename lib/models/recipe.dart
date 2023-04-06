@@ -143,8 +143,11 @@ class Recipe {
     uri = json['uri'];
     label = json['label'];
     image = json['image'];
-    images =
-        json['images'] != null ? new Images.fromJson(json['images']) : null;
+
+    images:
+    json['images'] != null
+        ? Images.fromJson(json['images'] as Map<String, dynamic>)
+        : null;
     source = json['source'];
     url = json['url'];
     shareAs = json['shareAs'];
@@ -155,8 +158,9 @@ class Recipe {
     ingredientLines = json['ingredientLines'].cast<String>();
     if (json['ingredients'] != null) {
       ingredients = <Ingredients>[];
-      json['ingredients'].forEach((v) {
-        ingredients!.add(new Ingredients.fromJson(v));
+      List<dynamic> ingredientsJson = json['ingredients'];
+      ingredientsJson.forEach((v) {
+        ingredients!.add(Ingredients.fromJson(v));
       });
     }
     calories = json['calories'];
@@ -204,17 +208,16 @@ class Images {
 
   Images({this.tHUMBNAIL, this.sMALL, this.rEGULAR, this.lARGE});
 
-  Images.fromJson(Map<String, dynamic> json) {
-    tHUMBNAIL = json['THUMBNAIL'] != null
-        ? new THUMBNAIL.fromJson(json['THUMBNAIL'])
+  Images.fromJson(dynamic json) {
+    final Map<String, dynamic> data =
+        json is Map<String, dynamic> ? json : Map<String, dynamic>.from(json);
+    tHUMBNAIL = data['THUMBNAIL'] != null
+        ? THUMBNAIL.fromJson(data['THUMBNAIL'])
         : null;
-    sMALL =
-        json['SMALL'] != null ? new THUMBNAIL.fromJson(json['SMALL']) : null;
-    rEGULAR = json['REGULAR'] != null
-        ? new THUMBNAIL.fromJson(json['REGULAR'])
-        : null;
-    lARGE =
-        json['LARGE'] != null ? new THUMBNAIL.fromJson(json['LARGE']) : null;
+    sMALL = data['SMALL'] != null ? THUMBNAIL.fromJson(data['SMALL']) : null;
+    rEGULAR =
+        data['REGULAR'] != null ? THUMBNAIL.fromJson(data['REGULAR']) : null;
+    lARGE = data['LARGE'] != null ? THUMBNAIL.fromJson(data['LARGE']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -277,7 +280,7 @@ class Ingredients {
       this.foodId,
       this.image});
 
-  Ingredients.fromJson(Map<String, dynamic> json) {
+  Ingredients.fromJson(Map<dynamic, dynamic> json) {
     text = json['text'];
     quantity = json['quantity'];
     measure = json['measure'];

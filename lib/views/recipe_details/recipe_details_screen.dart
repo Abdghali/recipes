@@ -59,9 +59,8 @@ class RecipeDetails extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     recipe.ingredients!
-                        .map((e) => '${e.food}')
-                        .toList()
-                        .toString(), //Todo 1 list
+                        .map((e) => e.food)
+                        .join(", "), //Todo 1 list
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Colors.brown,
                         ),
@@ -84,7 +83,7 @@ class RecipeDetails extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    recipe.ingredientLines!.toString(),
+                    recipe.ingredientLines!.join("\n"),
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Colors.brown,
                         ),

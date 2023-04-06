@@ -10,7 +10,6 @@ class RecipesGridView extends StatelessWidget {
   final bool? isSearchView;
   RecipesGridView({Key? key, this.isSearchView = false}) : super(key: key);
 
-  // final List<RecipeModel>? myRecipeList = [];
   final controller = Get.put(RecipeController());
   @override
   Widget build(BuildContext context) {

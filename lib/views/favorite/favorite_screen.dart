@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:recipes/models/recipe.dart';
 
-import '../../models/recipe_model.dart';
+import '../../controllers/favoraits_controller.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  List<RecipeModel> favoriteRecipes;
-
-  FavoriteScreen({required this.favoriteRecipes});
-
   @override
   Widget build(BuildContext context) {
+    final favoritesController = Get.put(FavoritesController());
+
     return Scaffold(
-      backgroundColor: Colors.grey[200],
-      body: favoriteRecipes.isEmpty
-          ? Center(
+        backgroundColor: Colors.grey[200],
+        body: Obx(() {
+          return Visibility(
+            visible: favoritesController.Favoriterecipes.isNotEmpty,
+            replacement: Center(
               child: Text(
                 'You have no favorite recipes.',
                 style: TextStyle(
@@ -21,17 +23,19 @@ class FavoriteScreen extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
-            )
-          : ListView.builder(
-              itemCount: favoriteRecipes.length,
+            ),
+            child: ListView.builder(
+              itemCount: favoritesController.Favoriterecipes.length,
               itemBuilder: (BuildContext context, int index) {
-                RecipeModel recipe = favoriteRecipes[index];
+                Recipe recipe =
+                    favoritesController.Favoriterecipes.value[index]!;
                 return Dismissible(
-                  key: Key(recipe.name),
+                  key: Key(recipe.label!),
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
                     // Remove the recipe from the favoriteRecipes list
-                    favoriteRecipes.removeAt(index);
+                    favoritesController.Favoriterecipes.value.removeAt(index);
+                    //Todo 3
                   },
                   background: Container(
                     color: Colors.red[400],
@@ -53,7 +57,7 @@ class FavoriteScreen extends StatelessWidget {
                           child: FadeInImage(
                             placeholder:
                                 AssetImage('assets/images/placeholder4.png'),
-                            image: NetworkImage(recipe.imageUrl),
+                            image: NetworkImage(recipe.image!),
                             height: 90.0,
                             width: 90.0,
                             fit: BoxFit.cover,
@@ -68,7 +72,7 @@ class FavoriteScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                recipe.name,
+                                recipe.label!,
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
@@ -79,27 +83,31 @@ class FavoriteScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   Icon(
-                                    Icons.timer,
+                                    Icons.type_specimen_sharp,
                                     size: 16.0,
                                     color: Colors.grey[600],
                                   ),
                                   SizedBox(width: 4.0),
                                   Text(
-                                    'Prep: 10 min',
+                                    'Meal Type: ${recipe.mealType!.join(', ')} ',
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.grey[600],
                                     ),
                                   ),
-                                  SizedBox(width: 8.0),
+                                ],
+                              ),
+                              SizedBox(height: 4.0),
+                              Row(
+                                children: [
                                   Icon(
-                                    Icons.timer,
+                                    Icons.monitor_weight_outlined,
                                     size: 16.0,
                                     color: Colors.grey[600],
                                   ),
                                   SizedBox(width: 4.0),
                                   Text(
-                                    'Cook: 20 min',
+                                    'Weight: ${recipe.totalWeight!.toInt()} ',
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.grey[600],
@@ -116,6 +124,7 @@ class FavoriteScreen extends StatelessWidget {
                 );
               },
             ),
-    );
+          );
+        }));
   }
 }

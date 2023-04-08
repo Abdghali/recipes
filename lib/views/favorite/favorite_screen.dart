@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:recipes/models/recipe.dart';
@@ -52,21 +53,26 @@ class FavoriteScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4.0),
-                          child: FadeInImage(
-                            placeholder:
-                                AssetImage('assets/images/placeholder4.png'),
-                            image: NetworkImage(recipe.image!),
-                            height: 90.0,
-                            width: 90.0,
-                            fit: BoxFit.cover,
-                            fadeInDuration: Duration(milliseconds: 300),
-                            fadeInCurve: Curves.easeIn,
-                          ),
+                        Expanded(
+                          flex: 1,
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4.0),
+                              child: CachedNetworkImage(
+                                errorWidget: (_, __, ___) => Image.asset(
+                                  'assets/images/placeholder4.png',
+                                  fit: BoxFit.contain,
+                                ),
+                                imageUrl: recipe.image!,
+                                height: 90.0,
+                                width: 90.0,
+                                fit: BoxFit.cover,
+                                fadeInDuration: Duration(milliseconds: 300),
+                                fadeInCurve: Curves.easeIn,
+                              )),
                         ),
                         SizedBox(width: 16.0),
                         Expanded(
+                          flex: 3,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,

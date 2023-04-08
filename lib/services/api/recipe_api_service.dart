@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class RecipesApiService {
   String baseUrl =
-      '${AppConstant.api}${AppConstant.recipes}?app_id=${AppConstant.app_id}&app_key=${AppConstant.app_key}&type=public';
+      '${AppConstant.api}${AppConstant.recipes}?app_id=${AppConstant.app_id}&app_key=${AppConstant.app_key}&type=public&random=true';
   Future<List<Recipe?>> fetchRecipes(String searchValue) async {
     final response = await http.get(Uri.parse(baseUrl + '&q=$searchValue'));
 

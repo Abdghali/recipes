@@ -5,10 +5,11 @@ import 'package:recipes/models/recipe.dart';
 import '../../controllers/favoraits_controller.dart';
 
 class FavoriteScreen extends StatelessWidget {
+  final favoritesController = Get.put(FavoritesController());
+
   @override
   Widget build(BuildContext context) {
-    final favoritesController = Get.put(FavoritesController());
-
+    favoritesController.init();
     return Scaffold(
         backgroundColor: Colors.grey[200],
         body: Obx(() {
@@ -34,8 +35,7 @@ class FavoriteScreen extends StatelessWidget {
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
                     // Remove the recipe from the favoriteRecipes list
-                    favoritesController.Favoriterecipes.value.removeAt(index);
-                    //Todo 3
+                    favoritesController.removeRecipeFromFavourites(recipe);
                   },
                   background: Container(
                     color: Colors.red[400],

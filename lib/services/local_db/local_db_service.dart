@@ -23,7 +23,7 @@ class RecipesLocalService {
 
   Future<void> addRecipeToFavourites(Recipe recipe) async {
     final box = await _getBox();
-    await box.add(recipe);
+    await box.put(recipe.label, recipe);
   }
 
   Future<List<Recipe>> getFavouriteRecipes() async {
@@ -33,7 +33,7 @@ class RecipesLocalService {
 
   Future<void> removeRecipeFromFavourites(Recipe recipe) async {
     final box = await _getBox();
-    await box.delete(recipe);
+    await box.deleteAll([recipe.label]);
   }
 
   Future<void> clearFavouriteRecipes() async {

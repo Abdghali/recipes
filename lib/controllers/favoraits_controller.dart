@@ -8,8 +8,7 @@ import '../services/api/recipe_api_service.dart';
 class FavoritesController extends BaseController {
   RxList<Recipe?> Favoriterecipes = <Recipe?>[].obs;
 
-  @override
-  void onInit() {
+  void init() {
     fetchRecipes();
     super.onInit();
   }
@@ -26,5 +25,14 @@ class FavoritesController extends BaseController {
       print(e.toString());
     } finally {}
     stopLoading();
+  }
+
+  void removeRecipeFromFavourites(Recipe recipe) async {
+    try {
+      await RecipesLocalService.instance.removeRecipeFromFavourites(recipe);
+      fetchRecipes();
+    } catch (e) {
+      print(e);
+    }
   }
 }

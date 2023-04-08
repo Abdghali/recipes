@@ -30,9 +30,11 @@ class RecipeDetailsController extends BaseController {
   }
 
   void removeRecipeFromFavourites(Recipe recipe) async {
-    // try {
-    await RecipesLocalService.instance.removeRecipeFromFavourites(recipe);
-    // } catch (e) {}
+    try {
+      await RecipesLocalService.instance.removeRecipeFromFavourites(recipe);
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   isFavourite(Recipe recipe) async {
